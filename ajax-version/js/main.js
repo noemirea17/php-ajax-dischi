@@ -4,6 +4,7 @@ var app = new Vue({
   el: "#app",
   data: {
     albums: [],
+    authors: [],
     selected: "",
   },
   mounted() {
@@ -11,14 +12,17 @@ var app = new Vue({
       .get("http://localhost:8888/php-ajax-dischi/ajax-version/server.php")
       .then((result) => {
         console.log(result.data);
-        console.log(result.data);
         this.albums = result.data;
-        console.log(this.albums);
+        this.albums.forEach((element) => {
+          if (!this.authors.includes(element.author)) {
+            this.authors.push(element.author);
+          }
+        });
+        console.log(this.authors);
       });
   },
   methods: {
-    choose(event) {
-      console.log(event.target.value);
+    choose() {
       console.log(this.selected);
     },
   },

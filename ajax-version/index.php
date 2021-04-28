@@ -15,8 +15,11 @@
     </header>
     <main>
         <div id="app">
+        <select v-model="selected" @change="choose()"   name="" id="">
+            <option  v-for="author in authors" :value="author">{{author}}</option>
+        </select>
             <div class="container">
-                <div v-for="album in albums" class="album_container" >                    
+                <div v-for="album in albums" class="album_container" :class="(album.author == selected) ? 'visible' : 'hidden'">                    
                     <div class="album_image">
                         <img :src="album.poster" alt="">
                     </div>

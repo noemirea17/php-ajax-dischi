@@ -4,7 +4,7 @@ var app = new Vue({
   el: "#app",
   data: {
     albums: [],
-    authors: [],
+    authors: ["All"],
     selected: "",
   },
   mounted() {

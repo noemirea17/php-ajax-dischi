@@ -1,5 +1,3 @@
-Vue.config.devtools = true;
-
 var app = new Vue({
   el: "#app",
   data: {
@@ -14,16 +12,25 @@ var app = new Vue({
         console.log(result.data);
         this.albums = result.data;
         this.albums.forEach((element) => {
+          console.log(element);
           if (!this.authors.includes(element.author)) {
             this.authors.push(element.author);
           }
         });
-        console.log(this.authors);
+        // this.listAuthors();
       });
   },
   methods: {
-    choose() {
-      console.log(this.selected);
+    getFilteredAlbums: function () {
+      axios
+        .get(
+          "http://localhost:8888/php-ajax-dischi/ajax-version/server.php?action=filter_authors&author=" +
+            this.selected
+        )
+        .then((result) => {
+          console.log(result.data);
+          this.albums = result.data;
+        });
     },
   },
 });
